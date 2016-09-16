@@ -1,3 +1,5 @@
+-- By (R)soft 15.09.2016 for ESP8266 NodeMcu board with ESP-12E
+
 gpio = 5
 require('ds18b20')
 ds18b20.setup(gpio)
@@ -11,7 +13,7 @@ conn=net.createConnection(net.TCP, 0)
 conn:on("receive", function(conn, payload) print(payload) end)
 -- api.thingspeak.com 52.7.53.111 (old 184.106.153.149)
 conn:connect(80,'52.7.53.111') 
-conn:send("GET /update?key=APIKEY&field1="..t.." HTTP/1.1\r\n") 
+conn:send("GET /update?key=API_KEY&field1="..t.." HTTP/1.1\r\n") 
 conn:send("Host: api.thingspeak.com\r\n") 
 conn:send("Accept: */*\r\n") 
 conn:send("User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n")
