@@ -7,6 +7,6 @@ ds18b20.lua - library for DS18B20 sensor;
 
 sender.lua - get data from DS18B20 sensor and post them to Thinkspeak.com
 
-
 Please remember change your thingspeak API key and WIFI settings...
 
+By (R)soft 15.09.2016
