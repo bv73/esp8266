@@ -1,3 +1,5 @@
+-- By (R)soft 16.09.2016 for ESP8266 NodeMcu module with ESP-12E
+
 require('mpl3115a2')               
 
 id=0  -- Software I2C
