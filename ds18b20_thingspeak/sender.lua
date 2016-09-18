@@ -12,8 +12,8 @@ print("Sending data to thingspeak.com")
 conn=net.createConnection(net.TCP, 0) 
 conn:on("receive", function(conn, payload) print(payload) end)
 
--- api.thingspeak.com 52.7.53.111 (old 184.106.153.149)
-conn:connect (80,'52.7.53.111')
+-- api.thingspeak.com 184.106.153.149
+conn:connect (80,'184.106.153.149')
 conn:send(
      "GET /update?key=API_KEY&field1=" .. t ..
      " HTTP/1.1\r\n" ..
