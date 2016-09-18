@@ -5,8 +5,7 @@ require('ds18b20')
 ds18b20.setup(pin)
 
 function sendData()
---t=ds18b20.read()
-t = 23.5
+t=ds18b20.read()
 print("Temperature:"..t.." C\n")
 -- conection to thingspeak.com
 print("Sending data to thingspeak.com")
@@ -16,7 +15,7 @@ conn:on("receive", function(conn, payload) print(payload) end)
 -- api.thingspeak.com 52.7.53.111 (old 184.106.153.149)
 conn:connect (80,'52.7.53.111')
 conn:send(
-     "GET /update?key=80AFCACNYJ7AUREP&field1=" .. t ..
+     "GET /update?key=API_KEY&field1=" .. t ..
      " HTTP/1.1\r\n" ..
      "Host: api.thingspeak.com\r\n" ..
      "Accept: */*\r\n" ..
