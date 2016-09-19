@@ -13,10 +13,8 @@ tmr.alarm(0, 5000, 1, function()
    t = bmp180.getTemperature()
    p = bmp180.getPressure()
 
-   -- temperature in degrees Celsius  and Farenheit
+   -- temperature & pressure
    print("Temperature: "..(t/10).." C")
-
-   -- pressure in differents units
    print("Pressure: "..(p * 75 / 10000).." mmHg")
    print()
 
