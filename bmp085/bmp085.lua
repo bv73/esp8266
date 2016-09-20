@@ -1,6 +1,8 @@
 -- BMP085 module v1.0
 -- Compatible with BMP180 sensor
 -- MIT license, http://opensource.org/licenses/MIT
+-- This module need on a old firmware 0.9.x
+-- In fifmware 1.4.5.1 this module may be included
     
 local moduleName = ...
 local M = {}
