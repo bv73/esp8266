@@ -2,10 +2,10 @@
 
 require('mpl3115a2')               
 
-id=0  -- Software I2C
+id = 0  -- Software I2C
 
-sda=3 -- connect to pin GPIO0 (D3)
-scl=4 -- connect to pin GPIO2 (D4)
+sda = 3 -- connect to pin GPIO0 (D3)
+scl = 4 -- connect to pin GPIO2 (D4)
 
 function sendData()
 baro, temp = mpl3115a2.read()
