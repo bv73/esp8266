@@ -14,7 +14,7 @@ scl = 5 -- scl pin, GPIO14
 mpl3115a2.init()
 bmp085.init(sda, scl)
 si7021.init(sda, scl)
-bh1750.init(scl, scl)
+bh1750.init(sda, scl)
 
 function sendData()
   p1, t1 = mpl3115a2.read()
@@ -45,7 +45,7 @@ function sendData()
   conn:connect (80,'184.106.153.149')
   conn:on("connection",
     function(conn) print("Connected")
-      conn:send('GET /update?key=80AFCACNYJ7AUREP' ..
+      conn:send('GET /update?key=API_KEY' ..
       '&field1=' .. string.format("%.1f", t1) ..
       '&field2=' .. string.format("%.1f", p1) ..
       '&field3=' .. string.format("%.1f", t2) ..
