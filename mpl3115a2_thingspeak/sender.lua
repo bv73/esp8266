@@ -21,7 +21,7 @@ function sendData()
   conn:connect (80,'184.106.153.149')
   conn:on("connection",
     function(conn) print("Connected")
-      conn:send('GET /update?key=80AFCACNYJ7AUREP' ..
+      conn:send('GET /update?key=API_KEY' ..
       '&field1=' .. string.format("%.3f", t) ..
       '&field2=' .. string.format("%.3f", p) ..
       ' HTTP/1.1\r\n' ..
