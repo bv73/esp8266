@@ -1,8 +1,5 @@
--- Library for working with MPL3115A2 I2C Barometric/Altitude sensor
--- As used on breakout board by Adafruit
--- Adapted from code by gareth@l0l.org.uk, Hamish Cunningham and Aeprox@github
--- This code is GPL v3 by steve@wormpurple.com
--- blah blah blah standard licence conditions apply blah blah blah
+-- Library for MPL3115A2 I2C Barometric/Altitude sensor
+-- By (R)soft 22.09.2016 v1.3
 
 local moduleName = "mpl3115a2"
 
