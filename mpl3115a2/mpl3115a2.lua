@@ -12,14 +12,13 @@ local function read_reg(dev_addr, reg_addr)
      i2c.start(id)
      a = i2c.address(id, dev_addr, i2c.TRANSMITTER)
 	 if a ~= true then 
-		print("Connection Error")
+	    print("Connection Error")
 	end
      i2c.write(id, reg_addr)
-     -- i2c.stop(id) < Don't send a stop for this device
      i2c.start(id)
      a = i2c.address(id, dev_addr, i2c.RECEIVER)
 	 if a ~= true then 
-		print("Connection Error")
+            print("Connection Error")
 	end
      c = i2c.read(id, 1)
      i2c.stop(id)
@@ -30,7 +29,7 @@ local function write_reg(dev_addr, reg_addr, val)
     i2c.start(id)
     a = i2c.address(id, dev_addr ,i2c.TRANSMITTER)
 	if a ~= true then 
-		print("Connection Error")
+           print("Connection Error")
 	end
      c = i2c.write(id,reg_addr, val)
      i2c.stop(id)
