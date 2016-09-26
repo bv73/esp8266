@@ -27,14 +27,6 @@ function write_OLED() -- Write Display
    until disp:nextPage() == false   
 end
 
-function aaa()
-  init_i2c_display()
-
-  disp:firstPage()
-  disp:drawStr(5, 1, "XBM picture")
-  disp:drawBox(0,0,10,10)
-end
-
 init_i2c_display()
 write_OLED()
 
