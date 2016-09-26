@@ -1,3 +1,6 @@
+-- By (R)soft 26.09.2016 v1.0
+-- Tested with NodeMCU 1.5.4.1
+
 function init_i2c_display()
      -- SDA and SCL can be assigned freely to available GPIOs
      local sda = 6
