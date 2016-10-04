@@ -1,1 +1,16 @@
+Settings for RoboRemo App
+=========================
+Кнопка Connect - set press action: con tcp 192.168.0.1:9876
 
+Кнопка Disconnect - set press action: disconnect
+
+Heartbeat sender - set id: request
+                 - set repeat period: 1000
+
+Plot - set id: temp
+     - set label: label:temperature=#*1.0C
+     - set min: 15
+     - set max: 40
+     - set length: 60
+
+http://www.roboremo.com/esp-ds18b20.html
