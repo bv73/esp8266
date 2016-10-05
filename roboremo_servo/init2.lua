@@ -1,7 +1,3 @@
--- By (R)soft 5.10.2016 v1.0
--- This example version for NodeMCU firmware with 'pwm' module
--- Use servo_interface2 for RoboRemo App
-
 wifi.setmode(wifi.SOFTAP)
 
 cfg={}
@@ -27,19 +23,27 @@ end
 
 servo = {}
 servo.pin = 4 --this is GPIO2
-servo.value = 10 -- Initial value from 0 to 1023
+servo.value = 1500
 servo.id = "servo"
+
 
 cmd = ""
 
-pwm.setup(servo.pin, 50, 10) -- 50 Hz, Initial value=10
-pwm.start(servo.pin)
+gpio.mode(servo.pin,gpio.OUTPUT)
+gpio.write(servo.pin,gpio.LOW)
+
+tmr.alarm(0, 20, 1, function() -- 50Hz 
+    if servo.value then -- generate pulse
+        gpio.write(servo.pin, gpio.HIGH)
+        tmr.delay(servo.value)
+        gpio.write(servo.pin, gpio.LOW)
+    end
+end)
     
--- servo value from 0 to 1023
-function exeCmd(st) -- example: "servo 500"
+-- servo value from 10 to 18000
+function exeCmd(st) -- example: "servo 1500"
     if stringStarts(st, servo.id.." ") then -- value comes after id + space
         servo.value = tonumber( string.sub(st,1+string.len(servo.id.." "),string.len(st)) )
-        pwm.setduty(servo.pin, servo.value) -- set pwm after get value
     end
 end
 
@@ -55,9 +59,6 @@ function receiveData(conn, data)
     end 
 end
 
-print("ESP8266 servo controller")
-print("SSID: " .. cfg.ssid .. "  PASS: " .. cfg.pwd)
-print("RoboRemo app must connect to " .. cfg.ip .. ":" .. port)
 
 srv=net.createServer(net.TCP, 28800) 
 srv:listen(port,function(conn)
