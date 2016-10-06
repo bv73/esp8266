@@ -1,5 +1,5 @@
-RoboRemo Example with ESP8266 module and NodeMCU firmware
-=========================================================
+RoboRemo Example with ESP8266 NodeMCU
+=====================================
 
  init.lua - example with 'pwm' module;
  
