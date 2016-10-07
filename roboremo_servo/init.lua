@@ -1,6 +1,7 @@
--- By (R)soft 5.10.2016 v1.0
+-- By (R)soft 6.10.2016 v1.2
 -- This example version for NodeMCU firmware with 'pwm' module
--- Use servo_interface2 for RoboRemo App
+-- Use servo_iface4 for RoboRemo App
+-- Accelerometer via pwm
 
 wifi.setmode(wifi.SOFTAP)
 
@@ -18,11 +19,11 @@ wifi.ap.setip(cfg)
 wifi.ap.config(cfg)
 
 function stringStarts(a,b)
-    return string.sub(a,1,string.len(b))==b
+  return string.sub(a,1,string.len(b))==b
 end
 
 function stringEnds(a,b)
-   return b=='' or string.sub(a,-string.len(b))==b
+  return b=='' or string.sub(a,-string.len(b))==b
 end
 
 servo = {}
@@ -34,40 +35,54 @@ cmd = ""
 
 pwm.setup(servo.pin, 50, 10) -- 50 Hz, Initial value=10
 pwm.start(servo.pin)
+
+-- setup LED pin
+led = 5
+gpio.mode(led, gpio.OUTPUT)
+gpio.write(led, gpio.HIGH) -- LED turn off
     
 -- servo value from 0 to 1023
-function exeCmd(st) -- example: "servo 500"
-    if stringStarts(st, servo.id.." ") then -- value comes after id + space
-        servo.value = tonumber( string.sub(st,1+string.len(servo.id.." "),string.len(st)) )
-        pwm.setduty(servo.pin, servo.value) -- set pwm after get value
-    end
+function exeCmd(st) -- example: "servo 500" or "led1"
+  if stringStarts(st, servo.id.." ") then -- value comes after id + space
+    servo.value = tonumber( string.sub(st,1+string.len(servo.id.." "),string.len(st)) )
+    -- set pwm after get value
+    pwm.setduty(servo.pin, servo.value)
+    -- send back to RoboRemo of value for monitoring
+    connection:send("back " .. servo.value .. "\n")
+  elseif stringStarts(st, "led0") then
+    gpio.write(led, gpio.HIGH)
+  elseif stringStarts(st, "led1") then
+    gpio.write(led, gpio.LOW) -- LED on
+  end
 end
 
 
 function receiveData(conn, data)
-    cmd = cmd .. data
+  cmd = cmd .. data
 
-    local a, b = string.find(cmd, "\n", 1, true)   
-    while a do
-        exeCmd( string.sub(cmd, 1, a-1) )
-        cmd = string.sub(cmd, a+1, string.len(cmd))
-        a, b = string.find(cmd, "\n", 1, true)
-    end 
+  local a, b = string.find(cmd, "\n", 1, true)   
+  while a do
+    exeCmd( string.sub(cmd, 1, a-1) )
+    cmd = string.sub(cmd, a+1, string.len(cmd))
+    a, b = string.find(cmd, "\n", 1, true)
+  end 
 end
 
 print("ESP8266 servo controller")
 print("SSID: " .. cfg.ssid .. "  PASS: " .. cfg.pwd)
 print("RoboRemo app must connect to " .. cfg.ip .. ":" .. port)
 
-srv=net.createServer(net.TCP, 28800) 
+srv = net.createServer(net.TCP, 28800) 
 srv:listen(port,function(conn)
-    print("RoboRemo connected")
-    conn:send("dbg connected ok\n")
+  print("RoboRemo connected")
+
+  connection = conn
+  conn:send("dbg connected ok\n")
      
-    conn:on("receive",receiveData)  
+  conn:on("receive",receiveData)  
     
-    conn:on("disconnection",function(c) 
-        print("RoboRemo disconnected")
+  conn:on("disconnection",function(c) 
+    print("RoboRemo disconnected")
     end)
     
 end)
