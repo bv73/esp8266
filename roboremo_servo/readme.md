@@ -1,4 +1,4 @@
-RoboRemo Example with ESP8266 NodeMCU
+RoboRemo servo Example with ESP8266 NodeMCU
 =====================================
 
  init.lua - example with 'pwm' module & accelerometer & sending back to RoboRemo servo info & LED button;
