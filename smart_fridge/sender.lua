@@ -40,7 +40,7 @@ function sendData()
   conn:connect (80,'184.106.153.149')
   conn:on("connection",
     function(conn) print("Connected")
-      conn:send('GET /update?key=9L4MJ7SP5PRLR9HS' ..
+      conn:send('GET /update?key=API_KEY' ..
       '&field1=' .. string.format("%.2f", t3) ..
       '&field2=' .. string.format("%.2f", t2) ..
       '&field3=' .. string.format("%.2f", t1) ..
@@ -66,4 +66,4 @@ function sendData()
 end
 
   -- send data every X ms to thing speak
-  tmr.alarm(0, 30000, 1, function() sendData() end )
+  tmr.alarm(0, 60000, 1, function() sendData() end )
