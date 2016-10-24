@@ -83,7 +83,7 @@ function sendData()
   conn:on("connection",
   function(conn) 
     print("Connected")
-    conn:send('GET /update?key=9L4MJ7SP5PRLR9HS' ..
+    conn:send('GET /update?key=API_KEY' ..
     '&field1=' .. string.format("%.1f", t3) ..
     '&field2=' .. string.format("%.1f", t2) ..
     '&field3=' .. string.format("%.1f", t1) ..
