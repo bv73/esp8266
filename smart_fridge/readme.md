@@ -11,4 +11,8 @@ Third DS18B20 sensor measure temperature air of kitchen;
 
 And last, ACS712 sensor measure current of compressor.
 
-Each measuring value sending to thingspeak.com for visualisation.
+Calculating Power & Power per hour/day.
+
+Each measuring value sending to thingspeak.com for store & visualisation.
+
+Use enduder_setup for easy Wi-Fi connection setup.
