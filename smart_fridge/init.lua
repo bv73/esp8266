@@ -1,9 +1,24 @@
-print("Setting up Wi-Fi...")
-wifi.setmode(wifi.STATION)
+-- Smart Fridge init & setup Wi-Fi through enduser_setup
+-- By (R)soft 22.10.2016 v1.0
 
---modify according your wireless router settings
-wifi.sta.config("SSID","PASSWORD")
-wifi.sta.connect()
+print("Setting up Wi-Fi...")
+wifi.setmode(wifi.STATIONAP)
+-- password consist from number combination & serial number
+wifi.ap.config({ssid="smart_fridge", pwd="PASSWORD"})
+
+if file.exists("enduser_setup.html") then
+    print("Detected custome page for EUS")
+end
+
+enduser_setup.manual(true)
+enduser_setup.start(
+  function()
+    print("Connected to wifi as:" .. wifi.sta.getip())
+  end,
+  function(err, str)
+    print("enduser_setup: Err #" .. err .. ": " .. str)
+  end)
+
 tmr.alarm(1, 2000, 1, function() 
 if wifi.sta.getip()== nil then 
   print("IP unavaiable, Waiting...") 
@@ -13,3 +28,4 @@ else
   dofile("sender.lua")
 end
 end)
+
