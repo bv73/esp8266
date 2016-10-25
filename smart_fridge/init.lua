@@ -3,7 +3,7 @@
 
 print("Setting up Wi-Fi...")
 wifi.setmode(wifi.STATIONAP)
--- password consist from number combination & serial number
+-- password consist from combination & serial number
 wifi.ap.config({ssid="smart_fridge", pwd="PASSWORD"})
 
 if file.exists("enduser_setup.html") then
