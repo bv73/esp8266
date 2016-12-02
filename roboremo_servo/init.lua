@@ -1,4 +1,6 @@
 -- By (R)soft 6.10.2016 v1.2
+-- v1.4 2.12.2016 add ads1110 battery voltage monitoring
+-- Use iface7 example for roboremo app
 -- This example version for NodeMCU firmware with 'pwm' module
 -- Use servo_iface4 for RoboRemo App
 -- Accelerometer via pwm
