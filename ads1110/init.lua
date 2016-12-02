@@ -32,6 +32,6 @@ tmr.alarm(0, 5000, 1, function()
   val = read_ads1110()
   print("---------------------")
   print("Raw code " .. val)
-  u = val*1.286e-4
+  u = val*1.279e-4
   print("Battery Voltage = " .. string.format("%.3f", u) .. " V")
 end)
