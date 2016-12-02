@@ -12,7 +12,7 @@
 scl = 5
 sda = 6
 
-i2c.setup(id, sda, scl, i2c.SLOW)
+i2c.setup(0, sda, scl, i2c.SLOW)
 
 -- 0x90 For ED0 slave address (0x48 without low bit)
 
