@@ -1,6 +1,7 @@
 -- Smart Fridge By (R)soft 18.10.2016 v1.0
 -- v1.1 3/12/2016 add use in hours option & remove Ampere field
 --                & sending data every 1 minute & remove pin variable
+-- v1.11 6/12/2016 fix watt per day calculating
 -- This project require modules 'adc', 'bit', 'user_setup' 
 --   & '1-wire' in the nodemcu-build.com
 -- Three DS18B20 sensors & ACS712-05 Current sensor
@@ -68,7 +69,7 @@ function send_ts()
     flaghour = 1 -- flag for sending one time per hour
     if (hour == 24) then -- one day
       hour = 0
-      wd = 0 -- clear watt*day
+      wd = wh -- fix bug in v1.11
     end
   end
   print("Temperature#1: " .. string.format("%.1f", t1) .. " C")
@@ -103,7 +104,6 @@ function send_ts()
       '\r\n')
     end)
   flaghour = 0 -- reset flaghour after sending
---  wh = 0 -- clear after sending
   -- end connection section
   else
   conn:on("connection",
