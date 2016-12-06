@@ -1,7 +1,7 @@
 -- Smart Fridge By (R)soft 18.10.2016 v1.0
 -- v1.1 3/12/2016 add use in hours option & remove Ampere field
 --                & sending data every 1 minute & remove pin variable
--- v1.11 6/12/2016 fix watt per day calculating
+-- v1.11 6/12/2016 fix Watt per day calculating
 -- This project require modules 'adc', 'bit', 'user_setup' 
 --   & '1-wire' in the nodemcu-build.com
 -- Three DS18B20 sensors & ACS712-05 Current sensor
@@ -13,7 +13,7 @@ minute = 0
 hour = 0
 wh = 0 -- Power: Watt * hour
 wd = 0 -- Power: Watt * day
-summ = 0 -- summa for watt*hour counter
+summ = 0 -- summa for Watt*hour counter
 
 -- setup LED pin (Indication of data send)
 led = 4 -- D4 LED onboard
