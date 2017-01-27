@@ -1,0 +1,9 @@
+-- Smart Fridge By (R)soft 18.10.2016 v1.0
+-- This project require modules 'adc', 'bit', 'user_setup' 
+--   & '1-wire' in the nodemcu-build.com
+-- Three DS18B20 sensors & ACS712-05 Current sensor
+-- Testing on the binary nodemcu 1.5.4.1
+-- v1.1 3/12/2016 add use in hours option & remove Ampere field
+-- & sending data every 1 minute & remove pin variable
+-- v1.11 6/12/2016 fix Watt per day calculating
+-- v1.2 21/01/2017 close enduser_setup portal & delay to first send

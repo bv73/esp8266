@@ -1,39 +1,26 @@
--- Smart Fridge By (R)soft 18.10.2016 v1.0
--- v1.1 3/12/2016 add use in hours option & remove Ampere field
---                & sending data every 1 minute & remove pin variable
--- v1.11 6/12/2016 fix Watt per day calculating
--- This project require modules 'adc', 'bit', 'user_setup' 
---   & '1-wire' in the nodemcu-build.com
--- Three DS18B20 sensors & ACS712-05 Current sensor
--- Testing on the binary nodemcu 1.5.4.1
-
+print("\nSmart Fridge Module\n")
 count = 0 -- use in hours
 flaghour = 1 -- set for first sending of counter=0
-minute = 0
-hour = 0
+minute = 0; hour = 0
 wh = 0 -- Power: Watt * hour
 wd = 0 -- Power: Watt * day
 summ = 0 -- summa for Watt*hour counter
-
 -- setup LED pin (Indication of data send)
-led = 4 -- D4 LED onboard
-gpio.mode(led, gpio.OUTPUT)
-gpio.write(led, gpio.HIGH) -- LED turn off
-
+gpio.mode(4, gpio.OUTPUT) -- D4 LED onboard
+gpio.write(4, gpio.HIGH) -- LED turn off
 require('ds18b20')
 ds18b20.setup(7) -- D7 = DQ
 -- Search all sensors on OW bus & store to table of addresses DS18B20
 address = ds18b20.addrs()
-t1 = ds18b20.read(address[1]) -- dummy reads after first power on
-t2 = ds18b20.read(address[2])
-t3 = ds18b20.read(address[3])
-t1 = ds18b20.read(address[1])
-t2 = ds18b20.read(address[2])
-t3 = ds18b20.read(address[3])
-t1 = ds18b20.read(address[1])
-t2 = ds18b20.read(address[2])
-t3 = ds18b20.read(address[3])
-
+ds18b20.read(address[1]) -- dummy reads after first power on
+ds18b20.read(address[2])
+ds18b20.read(address[3])
+ds18b20.read(address[1])
+ds18b20.read(address[2])
+ds18b20.read(address[3])
+ds18b20.read(address[1])
+ds18b20.read(address[2])
+ds18b20.read(address[3])
 -- search maximum from sinewave signal
 function getCurrent()
   max = 0
@@ -45,7 +32,6 @@ function getCurrent()
   end
   return max
 end
-
 function send_ts()
   t1 = ds18b20.read(address[1])
   t2 = ds18b20.read(address[2])
@@ -71,6 +57,12 @@ function send_ts()
       hour = 0
       wd = wh -- fix bug in v1.11
     end
+  end
+  -- close enduser_setup portal after 5 minutes
+  if (minute == 5) and (hour == 0) then 
+    print("\n=== Portal closed ===\n")
+    enduser_setup.stop()
+    wifi.setmode(wifi.STATION)
   end
   print("Temperature#1: " .. string.format("%.1f", t1) .. " C")
   print("Temperature#2: " .. string.format("%.1f", t2) .. " C")
@@ -124,7 +116,7 @@ function send_ts()
   conn:on("sent", 
   function(conn)
     -- Indication of data send
-    gpio.write(led, gpio.LOW) -- LED on
+    gpio.write(4, gpio.LOW) -- LED on
     print("Data sent")
     conn:close()    -- You can disable this row for recieve thingspeak.com answer
   end)
@@ -136,9 +128,13 @@ function send_ts()
   conn:on("disconnection", 
   function(conn)
     print("Disconnect")
-    gpio.write(led, gpio.HIGH) -- LED off
+    gpio.write(4, gpio.HIGH) -- LED off
   end)
 end
-
+-- delay 8 sec for first send
+for z=1, 8 do
+  tmr.delay(1000000)
+  print("Delay 1 sec")
+end
 -- send data every 1 minute to thing speak
 tmr.alarm(0, 60000, 1, function() send_ts() end )
