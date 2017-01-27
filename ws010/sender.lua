@@ -1,18 +1,18 @@
 -- Weather station 003 By (R)soft 3.11.2016 v1.0
--- v1.1 at 30.11.2016 Add use in hour
--- v1.2 at 29.12.2016 Add second DS18B20 after halfdead of BME280
 -- This example require modules 'i2c' & 'BME280' in the nodemcu-build.com
 -- Testing on the binary nodemcu 1.5.4.1
 -- One sensor on I2C bus: BME280
 -- Two sensors on 1-Wire bus: DS18B20
-
+-- v1.1 at 30.11.2016 Add use in hour
+-- v1.2 at 29.12.2016 Add second DS18B20 after halfdead of BME280
+-- v1.3 21/01/2017 close enduser_setup portal & delay to first send
+print("\nWeather Station Module #3\n")
 scl = 5 -- scl pin, D5=GPIO14
 sda = 6 -- sda pin, D6=GPIO12
 
 -- setup LED pin (Indication of data send)
-led = 4 -- D4 LED onboard
-gpio.mode(led, gpio.OUTPUT)
-gpio.write(led, gpio.HIGH) -- LED turn off
+gpio.mode(4, gpio.OUTPUT) -- D4 LED onboard
+gpio.write(4, gpio.HIGH) -- LED turn off
 
 require('ds18b20')
 ds18b20.setup(7) -- pin7 = D7 = DQ
@@ -41,7 +41,6 @@ function sendData()
 --  if (t2 == nil) then t2 = 100 end
 --  h = h/1000
 --  t2 = t2/100
-
   -- Calc time
   minute = minute + 1
   if (minute == 60) then -- one hour
@@ -49,7 +48,12 @@ function sendData()
     hour = hour + 1
     flaghour = 1 -- flag for sending one time per hour
   end
-
+  -- close enduser_setup portal after 5 minutes
+  if (minute == 5) and (hour == 0) then 
+    print("\n=== Portal closed ===\n")
+    enduser_setup.stop()
+    wifi.setmode(wifi.STATION)
+  end
   print("Temperature #1: " .. string.format("%.1f", t1) .. " C")
   print("Temperature #2: " .. string.format("%.1f", t2) .. " C")  
   print("Pressure: " .. string.format("%.1f", p) .. " mmHg")
@@ -95,7 +99,7 @@ function sendData()
   conn:on("sent",
   function(conn)
     -- Indication of data send
-    gpio.write(led, gpio.LOW) -- LED on
+    gpio.write(4, gpio.LOW) -- LED on
     print("Data sent")
     conn:close()    -- You can disable this row for recieve thingspeak.com answer
   end)
@@ -107,9 +111,13 @@ function sendData()
   conn:on("disconnection", 
   function(conn)
     print("Disconnect")
-    gpio.write(led, gpio.HIGH) -- LED off
+    gpio.write(4, gpio.HIGH) -- LED off
   end)
 end
-
+-- delay 6 sec for first send
+for z=1, 6 do
+  tmr.delay(1000000)
+  print("Delay 1 sec")
+end
 -- send data every 1 minute to thing speak
 tmr.alarm(0, 60000, 1, function() sendData() end )
