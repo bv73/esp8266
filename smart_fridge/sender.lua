@@ -2,8 +2,8 @@ print("\nSmart Fridge Module\n")
 count = 0 -- use in hours
 flaghour = 1 -- set for first sending of counter=0
 minute = 0; hour = 0
-wh = 0 -- Power: Watt * hour
-wd = 0 -- Power: Watt * day
+wh = 0 -- Energy: Watt * hour
+wd = 0 -- Energy: Watt * day
 summ = 0 -- summa for Watt*hour counter
 -- setup LED pin (Indication of data send)
 gpio.mode(4, gpio.OUTPUT) -- D4 LED onboard
