@@ -16,3 +16,5 @@ Calculating Power & Power per hour/day.
 Each measuring value sending to thingspeak.com for store & visualisation.
 
 Use enduder_setup for easy Wi-Fi connection setup.
+
+Sending data to https://thingspeak.com/channels/172216
