@@ -3,24 +3,24 @@
 -- Testing on the binary nodemcu 1.5.4.1
 -- Two sensors on I2C bus: TSL2561 & MPL3115A2
 -- One DS18B20 sensor on 1-Wire bus
-
+-- v1.1 2/12/2016  add use in hours function
+-- v1.2 21/01/2017 close enduser_setup portal & delay to first send
+print("\nWeather Station Module #2\n")
 require('mpl3115a2')
 require('ds18b20')
 
 scl = 5 -- scl pin, GPIO14
 sda = 6 -- sda pin, GPIO12
-dq = 7 -- pin7 = D7 = DQ
 
 -- setup LED pin (Indication of data send)
-led = 4 -- D4 LED onboard
-gpio.mode(led, gpio.OUTPUT)
-gpio.write(led, gpio.HIGH) -- LED turn off
+gpio.mode(4, gpio.OUTPUT) -- D4 LED onboard
+gpio.write(4, gpio.HIGH) -- LED turn off
 
 mpl3115a2.init()
 tsl2561.init(sda, scl, tsl2561.ADDRESS_FLOAT, tsl2561.PACKAGE_T_FN_CL)
-tsl2561.settiming(tsl2561.INTEGRATIONTIME_402MS, tsl2561.GAIN_16X)
+--tsl2561.settiming(tsl2561.INTEGRATIONTIME_402MS, tsl2561.GAIN_16X)
 
-ds18b20.setup(dq)
+ds18b20.setup(7) -- pin7 = D7 = DQ
 t1 = ds18b20.read() -- dummy read
 t1 = ds18b20.read()
 t1 = ds18b20.read()
@@ -42,7 +42,12 @@ function sendData()
     hour = hour + 1
     flaghour = 1 -- flag for sending one time per hour
   end
-
+  -- close enduser_setup portal after 5 minutes
+  if (minute == 5) and (hour == 0) then 
+    print("\n=== Portal closed ===\n")
+    enduser_setup.stop()
+    wifi.setmode(wifi.STATION)
+  end
   print("Temperature DS18B20: " .. string.format("%.1f", t1) .. " C")
   print("Temperature MPL3115A2: " .. string.format("%.1f", t2) .. " C")
   print("Pressure: " .. string.format("%.1f", p) .. " mmHg")
@@ -88,7 +93,7 @@ function sendData()
   conn:on("sent",
   function(conn)
     -- Indication of data send
-    gpio.write(led, gpio.LOW) -- LED on
+    gpio.write(4, gpio.LOW) -- LED on
     print("Data sent")
     conn:close()    -- You can disable this row for recieve thingspeak.com answer
   end)
@@ -100,9 +105,13 @@ function sendData()
   conn:on("disconnection", 
   function(conn)
     print("Disconnect")
-    gpio.write(led, gpio.HIGH) -- LED off
+    gpio.write(4, gpio.HIGH) -- LED off
   end)
 end
-
-  -- send data every 1 minute to thing speak
-  tmr.alarm(0, 60000, 1, function() sendData() end )
+-- delay 4 sec for first send
+for z=1, 4 do
+  tmr.delay(1000000)
+  print("Delay 1 sec")
+end
+-- send data every 1 minute to thing speak
+tmr.alarm(0, 60000, 1, function() sendData() end )
