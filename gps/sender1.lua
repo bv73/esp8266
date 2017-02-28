@@ -55,9 +55,6 @@ uart.on("data", "\n", function (data)
 end, 0)
 
 function sendData()
---  print("Latitude=" .. string.format("%.8f", latitude) .. "\n")
---  print("Longitude=" .. string.format("%.8f", longitude) .. "\n")
-
   -- conection to thingspeak.com
   conn = net.createConnection(net.TCP, 0) 
   conn:connect (80,'api.thingspeak.com')
@@ -73,17 +70,18 @@ function sendData()
       '\r\n')
     end)
   conn:on("sent",function(conn)
-                    print("Data sent")
-                    conn:close()    -- You can disable this row for recieve thingspeak.com answer
+--                    print("Data sent")
+                    conn:close()
                  end)
   conn:on("receive",
      function(conn, payload)
-       print(payload)
+--       print(payload)
        conn:close()
      end)
-  conn:on("disconnection", function(conn)
-                              print("Disconnect")
-                           end)
+-- In V2.0.0 this section does not need
+--  conn:on("disconnection", function(conn)
+--                              print("Disconnect")
+--                           end)
 end
 
 -- send data every X ms to thing speak
