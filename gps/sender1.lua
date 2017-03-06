@@ -58,12 +58,8 @@ uart.on("data", "\n", function (data)
 end, 0)
 
 function sendData()
---  print("Latitude=" .. string.format("%.6f", latitude) .. "\n")
---  print("Longitude=" .. string.format("%.6f", longitude) .. "\n")
-
   -- conection to maps.googleapis.com
   gpio.write(4, gpio.LOW) -- LED on
---  uart.alt(0) -- enable debug interface
   conn = net.createConnection(net.TCP, 1) -- TLS connection
   conn:connect (443,'maps.googleapis.com') -- port 443 for TLS
   conn:on("connection",
