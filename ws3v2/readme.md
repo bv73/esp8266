@@ -6,3 +6,4 @@ Add 0.96" OLED display on SSD1306 (i2c)
 
 Add PIR sensor HC-SR501 on pin D1
 
+Sending data to https://thingspeak.com/channels/178434
