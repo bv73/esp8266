@@ -45,7 +45,6 @@ if wifi.sta.getip()== nil then
 else 
   tmr.stop(1)
   print("Config done, IP is "..wifi.sta.getip())
-  print("Config done, IP is "..wifi.sta.getip())
   disp:firstPage()
   repeat
     disp:drawStr(2, 26, "Config" )
