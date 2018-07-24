@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <title>ESP8266</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <style>
+            th {
+                text-align: center;
+            }
+            td {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+    <script type="text/javascript">
+        setInterval(function() { 
+            $.ajax({
+                url: "/data.json",
+                type: "GET",
+                datatype: "json",
+                timeout: 1000
+            })
+            .done(function(json) {
+                $("#connection").css("background-color", "green")
+                var data = JSON.parse(json);
+                $("#ADC0").text(data["ADC0"]);
+                $("#D0").text(data["D0"]);
+                $("#D1").text(data["D1"]);
+                $("#D2").text(data["D2"]);
+                $("#D3").text(data["D3"]);
+                $("#D4").text(data["D4"]);
+                $("#D5").text(data["D5"]);
+                $("#D6").text(data["D6"]);
+                $("#D7").text(data["D7"]);
+                $("#D8").text(data["D8"]);
+                $("#D9").text(data["D9"]);
+                $("#D10").text(data["D10"]);
+                $("#D11").text(data["D11"]);
+                $("#D12").text(data["D12"]);
+                $("#heap").text("heap : " + data["heap"]);
+            })
+            .fail(function(xhr, status, errorThrown) {
+                $("#connection").css("background-color", "red")
+            })
+        }, 1000);
+    </script>
+    <table class="table thead-dark table-sm" align="center">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Val</th>
+        <th>Input</th>
+        <th>Input pullup</th>
+        <th>Output 0</th>
+        <th>Output 1</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>ADC0</td>
+        <td id="ADC0">0</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D0</td>
+        <td id="D0">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/0/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/0/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/0/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/0/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D1</td>
+        <td id="D1">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/1/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/1/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/1/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/1/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D2</td>
+        <td id="D2">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/2/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/2/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/2/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/2/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D3</td>
+        <td id="D3">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/3/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/3/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/3/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/3/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D4 (LED)</td>
+        <td id="D4">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/4/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/4/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/4/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/4/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D5</td>
+        <td id="D5">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/5/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/5/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/5/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/5/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D6</td>
+        <td id="D6">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/6/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/6/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/6/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/6/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D7</td>
+        <td id="D7">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/7/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/7/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/7/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/7/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D8</td>
+        <td id="D8">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/8/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/8/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/8/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/8/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D9</td>
+        <td id="D9">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/9/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/9/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/9/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/9/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D10</td>
+        <td id="D10">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/10/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/10/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/10/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/10/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D11</td>
+        <td id="D11">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/11/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/11/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/11/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/11/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    <tr>
+        <td>D12</td>
+        <td id="D12">0</td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/12/INPUT', type: 'GET', timeout:1000});">INPUT</button></td>
+        <td><button class="btn btn-info" onclick="$.ajax({url: '/pin/12/INPUT_PULLUP', type: 'GET', timeout:1000});">INPUT_PULLUP</button></td>
+        <td><button class="btn btn-danger" onclick="$.ajax({url: '/pin/12/OUTPUT_0', type: 'GET', timeout:1000});">0V</button></td>
+        <td><button class="btn btn-success" onclick="$.ajax({url: '/pin/12/OUTPUT_1', type: 'GET', timeout:1000});">3.3V</button></td>
+    </tr>
+    </tbody>
+    </table>
+<p id="heap"></p>
+Connection : <div id="connection" style="width: 10px; height: 10px; background-color: red; display: inline-block;"></div>
+</body>
+</html>
