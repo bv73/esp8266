@@ -43,18 +43,17 @@ function sendData()
     -- end connection section
     conn:on("sent",
     function(conn)
-      print("Data sent")
       gpio.write(4, gpio.HIGH) -- LED off
       conn:close()    -- You can disable this row for recieve thingspeak.com answer
     end)
     conn:on("receive",
     function(conn, payload)
-      print(payload)
+--      print(payload)
       conn:close()
     end)
     conn:on("disconnection", 
     function(conn) 
-      print("Disconnect") 
+--      print("Disconnect") 
     end)
   end -- end of if
 end
