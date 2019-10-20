@@ -4,6 +4,7 @@
 -- Two sensors on I2C bus: BMP280, Si7021
 -- Two sensors on 1-Wire bus: DS18B20
 -- PIR sensor on interrupt pin D1
+-- Some optimizations
 
 print("\nWeather Station Module #3 v2.11\n")
 
