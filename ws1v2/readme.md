@@ -9,3 +9,5 @@ Add 1.3" OLED display on SH1106 (i2c)
 Add PIR sensor HC-SR501 on pin D1
 
 Sending data to https://thingspeak.com/channels/159150
+
+![visitors](https://visitor-badge.glitch.me/badge?page_id=VladimirBakum.esp8266.ws1v2)
