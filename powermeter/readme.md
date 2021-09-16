@@ -111,6 +111,8 @@ P.S. Надо отметить, что за последние полтора г
 </table>
 
 Work in progress...
+[![Visits Badge](https://badges.pufler.dev/visits/VladimirBakum/esp8266?style=for-the-badge&logo=Lua)](https://badges.pufler.dev)
 
+<!---
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=VladimirBakum.esp8266.powermeter&left_color=green&right_color=red)
-
+--->
