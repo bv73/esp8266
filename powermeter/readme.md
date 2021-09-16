@@ -112,7 +112,7 @@ P.S. Надо отметить, что за последние полтора г
 
 Work in progress...
 
-[![Visits Badge](https://badges.pufler.dev/visits/VladimirBakum/esp8266?style=for-the-badge&logo=Lua&labelColor=f7d99c&color=09951a)](https://badges.pufler.dev)
+[![Visits Badge](https://badges.pufler.dev/visits/VladimirBakum/esp8266?style=for-the-badge&logo=Lua&logoColor=red&labelColor=f7d99c&color=09951a)](https://badges.pufler.dev)
 
 <!---
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=VladimirBakum.esp8266.powermeter&left_color=green&right_color=red)
