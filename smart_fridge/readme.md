@@ -18,3 +18,14 @@ Each measuring value sending to thingspeak.com for store & visualisation.
 Use enduder_setup for easy Wi-Fi connection setup.
 
 Sending data to https://thingspeak.com/channels/172216
+
+---
+
+![](https://github.com/VladimirBakum/esp8266/blob/master/smart_fridge/pictures/1c7q9l70lf736.jpg)
+
+---
+
+![](https://github.com/VladimirBakum/esp8266/blob/master/smart_fridge/pictures/1c7q9l70qd2he.jpg)
+
+---
+
