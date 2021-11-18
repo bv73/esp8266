@@ -19,6 +19,8 @@ Use enduser_setup for easy Wi-Fi connection setup.
 
 Sending data to https://thingspeak.com/channels/172216
 
+<b>18.11.2021 Update: Last spring fridge was removed to country side without internet connection. So, thingspeak data not has been updated a long time.</b>
+
 ---
 
 ![](https://github.com/VladimirBakum/esp8266/blob/master/smart_fridge/pictures/1c7q9l70lf736.jpg)
