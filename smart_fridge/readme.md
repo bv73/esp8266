@@ -31,3 +31,10 @@ Sending data to https://thingspeak.com/channels/172216
 
 ---
 
+![](https://github.com/VladimirBakum/esp8266/blob/master/smart_fridge/pictures/1c6lszh5rfgj6.jpg)
+
+---
+
+![](https://github.com/VladimirBakum/esp8266/blob/master/smart_fridge/pictures/1c7irrod0ebyq.jpg)
+
+---
