@@ -3,6 +3,8 @@ Weather station #1
 
 By (R)soft 
 
+1.5.2018 v2.1
+
 4.10.2019 v2.11
 
 2.12.2022 v2.50 MQTT & SNTP & code structure improvement
