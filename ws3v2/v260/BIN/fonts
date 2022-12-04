@@ -1,0 +1,3 @@
+  disp = u8g.ssd1306_128x64_i2c(0x3c)
+
+font_9x15Br,font_ncenB18r,font_ncenB24r
